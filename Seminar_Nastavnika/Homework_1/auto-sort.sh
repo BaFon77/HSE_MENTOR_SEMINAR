@@ -21,13 +21,13 @@ mkdir -p "$DOC_DIR"
 
 echo "=== $(date): Начало сортировки файлов в $TARGET_DIR ===" >> "$LOG_FILE"
 
-for file in "$TARGET_DIR"/*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}; do
+for file in "$TARGET_DIR"/*.{jpg,png,gif}; do
     [ -e "$file" ] || continue
     mv "$file" "$IMG_DIR"
     echo "$(date): Перемещен файл $file -> $IMG_DIR" >> "$LOG_FILE"
 done
 
-for file in "$TARGET_DIR"/*.{txt,TXT,pdf,PDF,docx,DOCX}; do
+for file in "$TARGET_DIR"/*.{txt,pdf,docx}; do
     [ -e "$file" ] || continue
     mv "$file" "$DOC_DIR"
     echo "$(date): Перемещен файл $file -> $DOC_DIR" >> "$LOG_FILE"
