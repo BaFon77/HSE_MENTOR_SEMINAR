@@ -1,0 +1,346 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark.pyspark \nfrom pyspark.sql import functions as F\nfrom pyspark.sql.window import Window",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-20T15:39:24+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1776623637937_492009529",
+      "id": "paragraph_1776623637937_492009529",
+      "dateCreated": "2026-04-19T18:33:57+0000",
+      "dateStarted": "2026-04-20T15:39:24+0000",
+      "dateFinished": "2026-04-20T15:40:36+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1518"
+    },
+    {
+      "text": "%spark.pyspark\nspark.sql(\"\"\"\nCREATE TABLE IF NOT EXISTS transactions_v2 (\n    transaction_id   INT,\n    user_id          INT,\n    amount           DOUBLE,\n    currency         STRING,\n    transaction_date STRING,\n    is_fraud         INT\n)\nSTORED AS PARQUET\n\"\"\")\n\nspark.sql(\"\"\"\nCREATE TABLE IF NOT EXISTS logs_v2 (\n    log_id           INT,\n    transaction_id   INT,\n    category         STRING,\n    comment          STRING,\n    log_timestamp    STRING\n)\nSTORED AS PARQUET\n\"\"\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-20T15:41:02+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DataFrame[]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1776624757653_2106329532",
+      "id": "paragraph_1776624757653_2106329532",
+      "dateCreated": "2026-04-19T18:52:37+0000",
+      "dateStarted": "2026-04-20T15:41:02+0000",
+      "dateFinished": "2026-04-20T15:41:04+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:1519"
+    },
+    {
+      "text": "%spark.pyspark\npath = \"s3a://hadoopbacket/files\"\n\ndf_tx = spark.read \\\n    .option(\"header\", \"true\") \\\n    .option(\"inferSchema\", \"true\") \\\n    .option(\"sep\", \",\") \\\n    .csv(f\"{path}/transactions_v2.csv\")\n\ndf_tx.write.mode(\"overwrite\").insertInto(\"transactions_v2\")\nprint(\"transactions_v2:\", df_tx.count(), \"строк\")\n\ndf_logs = spark.read \\\n    .option(\"header\", \"true\") \\\n    .option(\"inferSchema\", \"true\") \\\n    .option(\"sep\", \";\") \\\n    .csv(f\"{path}/logs_v2.txt\")\n\ndf_logs.write.mode(\"overwrite\").insertInto(\"logs_v2\")\nprint(\"logs_v2:\", df_logs.count(), \"строк\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-20T15:41:39+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "transactions_v2: 20 строк\nlogs_v2: 16 строк\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=0",
+              "$$hashKey": "object:1620"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=1",
+              "$$hashKey": "object:1621"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=2",
+              "$$hashKey": "object:1622"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=3",
+              "$$hashKey": "object:1623"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=4",
+              "$$hashKey": "object:1624"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=5",
+              "$$hashKey": "object:1625"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=6",
+              "$$hashKey": "object:1626"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=7",
+              "$$hashKey": "object:1627"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=8",
+              "$$hashKey": "object:1628"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=9",
+              "$$hashKey": "object:1629"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1776624904409_548636849",
+      "id": "paragraph_1776624904409_548636849",
+      "dateCreated": "2026-04-19T18:55:04+0000",
+      "dateStarted": "2026-04-20T15:41:39+0000",
+      "dateFinished": "2026-04-20T15:42:00+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:1520"
+    },
+    {
+      "text": "%spark.pyspark\nspark.sql(\"SELECT * FROM transactions_v2 LIMIT 5\").show(truncate=False)\nspark.sql(\"SELECT * FROM logs_v2 LIMIT 5\").show(truncate=False)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-20T15:42:30+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------+-------+------+--------+-------------------+--------+\n|transaction_id|user_id|amount|currency|transaction_date   |is_fraud|\n+--------------+-------+------+--------+-------------------+--------+\n|10001         |500    |250.0 |USD     |2023-03-10 14:25:00|0       |\n|10002         |500    |300.5 |EUR     |2023-03-10 14:30:00|1       |\n|10003         |501    |-10.0 |USD     |2023-03-10 15:00:00|0       |\n|10004         |502    |400.0 |???     |2023-03-10 15:10:00|0       |\n|10005         |501    |120.5 |RUB     |2023-03-11 09:00:00|1       |\n+--------------+-------+------+--------+-------------------+--------+\n\n+------+--------------+-----------+-----------------------+-------------------+\n|log_id|transaction_id|category   |comment                |log_timestamp      |\n+------+--------------+-----------+-----------------------+-------------------+\n|1     |10001         |Electronics|User bought a phone    |2023-03-10 14:26:00|\n|2     |10002         |Travel     |Flight ticket to Europe|2023-03-10 14:31:00|\n|3     |99999         |System     |Unrelated transaction  |2023-03-10 14:40:00|\n|4     |10004         |System     |Weird currency ???     |2023-03-10 15:15:00|\n|5     |10006         |Electronics|Laptop purchase        |2023-03-11 09:10:00|\n+------+--------------+-----------+-----------------------+-------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=10",
+              "$$hashKey": "object:1664"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=11",
+              "$$hashKey": "object:1665"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=12",
+              "$$hashKey": "object:1666"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=13",
+              "$$hashKey": "object:1667"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1776625411383_263003111",
+      "id": "paragraph_1776625411383_263003111",
+      "dateCreated": "2026-04-19T19:03:31+0000",
+      "dateStarted": "2026-04-20T15:42:31+0000",
+      "dateFinished": "2026-04-20T15:42:33+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:1521"
+    },
+    {
+      "text": "%spark.pyspark\nprint(\"=== 1. Сумма транзакций по валютам USD, EUR, RUB ===\")\nspark.sql(\"\"\"\n    SELECT currency, COUNT(*) AS cnt, SUM(amount) AS total_amount\n    FROM transactions_v2\n    WHERE currency IN ('USD', 'EUR', 'RUB')\n    GROUP BY currency\n    ORDER BY total_amount DESC\n\"\"\").show()\n\nprint(\"=== 2. Фрод-анализ ===\")\nspark.sql(\"\"\"\n    SELECT is_fraud,\n           COUNT(*)        AS cnt,\n           SUM(amount)     AS total_amount,\n           AVG(amount)     AS avg_amount\n    FROM transactions_v2\n    GROUP BY is_fraud\n\"\"\").show()\n\nprint(\"=== 3. Ежедневная статистика ===\")\nspark.sql(\"\"\"\n    SELECT transaction_date,\n           COUNT(*)    AS daily_cnt,\n           SUM(amount) AS daily_volume,\n           AVG(amount) AS avg_amount\n    FROM transactions_v2\n    GROUP BY transaction_date\n    ORDER BY transaction_date\n\"\"\").show()\n\nprint(\"=== 4. Временные функции: день и месяц ===\")\nspark.sql(\"\"\"\n    SELECT transaction_id,\n           transaction_date,\n           MONTH(TO_DATE(transaction_date)) AS month,\n           DAY(TO_DATE(transaction_date))   AS day,\n           amount\n    FROM transactions_v2\n    ORDER BY month, day\n\"\"\").show()\n\nprint(\"=== 5. JOIN с logs_v2 ===\")\nspark.sql(\"\"\"\n    SELECT t.transaction_id,\n           t.amount,\n           COUNT(l.log_id)   AS log_count,\n           FIRST(l.category) AS top_category\n    FROM transactions_v2 t\n    LEFT JOIN logs_v2 l\n        ON t.transaction_id = l.transaction_id\n    GROUP BY t.transaction_id, t.amount\n    ORDER BY log_count DESC\n\"\"\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-20T15:47:10+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=14",
+              "$$hashKey": "object:1965"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=15",
+              "$$hashKey": "object:1966"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=16",
+              "$$hashKey": "object:1967"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=17",
+              "$$hashKey": "object:1968"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=18",
+              "$$hashKey": "object:1969"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=19",
+              "$$hashKey": "object:1970"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=20",
+              "$$hashKey": "object:1971"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=22",
+              "$$hashKey": "object:1972"
+            },
+            {
+              "jobUrl": "https://ui-c9qh3d8emc8dtlkui49q-rc1b-dataproc-d-msf9ar03a5j0h2hi-45055.dataproc-ui.yandexcloud.net/jobs/job?id=23",
+              "$$hashKey": "object:1973"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1776699587515_2036815577",
+      "id": "paragraph_1776699587515_2036815577",
+      "dateCreated": "2026-04-20T15:39:47+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:1522",
+      "dateFinished": "2026-04-20T15:47:18+0000",
+      "dateStarted": "2026-04-20T15:47:10+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "=== 1. Сумма транзакций по валютам USD, EUR, RUB ===\n+--------+---+------------+\n|currency|cnt|total_amount|\n+--------+---+------------+\n|     USD|  8|    12263.99|\n|     EUR|  4|      2171.0|\n|     RUB|  4|      320.25|\n+--------+---+------------+\n\n=== 2. Фрод-анализ ===\n+--------+---+------------+----------+\n|is_fraud|cnt|total_amount|avg_amount|\n+--------+---+------------+----------+\n|       1| 10|    12170.49|  1217.049|\n|       0| 10|      3653.7|    365.37|\n+--------+---+------------+----------+\n\n=== 3. Ежедневная статистика ===\n+-------------------+---------+------------+----------+\n|   transaction_date|daily_cnt|daily_volume|avg_amount|\n+-------------------+---------+------------+----------+\n|2023-03-10 14:25:00|        1|       250.0|     250.0|\n|2023-03-10 14:30:00|        1|       300.5|     300.5|\n|2023-03-10 15:00:00|        1|       -10.0|     -10.0|\n|2023-03-10 15:10:00|        1|       400.0|     400.0|\n|2023-03-11 09:00:00|        1|       120.5|     120.5|\n|2023-03-11 09:05:00|        1|       999.0|     999.0|\n|2023-03-11 10:10:00|        1|         0.0|       0.0|\n|2023-03-11 10:20:00|        1|       750.0|     750.0|\n|2023-03-12 11:00:00|        1|      275.25|    275.25|\n|2023-03-12 11:05:00|        1|       600.0|     600.0|\n|2023-03-12 11:10:00|        1|        45.5|      45.5|\n|2023-03-12 11:15:00|        1|       -25.0|     -25.0|\n|2023-03-13 09:00:00|        1|     9999.99|   9999.99|\n|2023-03-13 09:05:00|        1|       120.5|     120.5|\n|2023-03-13 09:10:00|        1|       500.0|     500.0|\n|2023-03-13 09:15:00|        1|      123.45|    123.45|\n|2023-03-14 10:00:00|        1|         0.0|       0.0|\n|2023-03-14 10:05:00|        1|       450.0|     450.0|\n|2023-03-14 10:10:00|        1|      1000.0|    1000.0|\n|2023-03-14 10:20:00|        1|       -75.5|     -75.5|\n+-------------------+---------+------------+----------+\n\n=== 4. Временные функции: день и месяц ===\n+--------------+-------------------+-----+---+-------+\n|transaction_id|   transaction_date|month|day| amount|\n+--------------+-------------------+-----+---+-------+\n|         10003|2023-03-10 15:00:00|    3| 10|  -10.0|\n|         10004|2023-03-10 15:10:00|    3| 10|  400.0|\n|         10001|2023-03-10 14:25:00|    3| 10|  250.0|\n|         10002|2023-03-10 14:30:00|    3| 10|  300.5|\n|         10005|2023-03-11 09:00:00|    3| 11|  120.5|\n|         10006|2023-03-11 09:05:00|    3| 11|  999.0|\n|         10007|2023-03-11 10:10:00|    3| 11|    0.0|\n|         10008|2023-03-11 10:20:00|    3| 11|  750.0|\n|         10012|2023-03-12 11:15:00|    3| 12|  -25.0|\n|         10010|2023-03-12 11:05:00|    3| 12|  600.0|\n|         10011|2023-03-12 11:10:00|    3| 12|   45.5|\n|         10009|2023-03-12 11:00:00|    3| 12| 275.25|\n|         10014|2023-03-13 09:05:00|    3| 13|  120.5|\n|         10015|2023-03-13 09:10:00|    3| 13|  500.0|\n|         10013|2023-03-13 09:00:00|    3| 13|9999.99|\n|         10016|2023-03-13 09:15:00|    3| 13| 123.45|\n|         10017|2023-03-14 10:00:00|    3| 14|    0.0|\n|         10018|2023-03-14 10:05:00|    3| 14|  450.0|\n|         10019|2023-03-14 10:10:00|    3| 14| 1000.0|\n|         10020|2023-03-14 10:20:00|    3| 14|  -75.5|\n+--------------+-------------------+-----+---+-------+\n\n=== 5. JOIN с logs_v2 ===\n+--------------+-------+---------+------------+\n|transaction_id| amount|log_count|top_category|\n+--------------+-------+---------+------------+\n|         10010|  600.0|        2| Electronics|\n|         10001|  250.0|        1| Electronics|\n|         10004|  400.0|        1|      System|\n|         10006|  999.0|        1| Electronics|\n|         10020|  -75.5|        1|        Misc|\n|         10007|    0.0|        1|        Misc|\n|         10002|  300.5|        1|      Travel|\n|         10013|9999.99|        1|        Misc|\n|         10014|  120.5|        1| Electronics|\n|         10015|  500.0|        1|       Other|\n|         10019| 1000.0|        1|      Travel|\n|         10003|  -10.0|        0|        null|\n|         10011|   45.5|        0|        null|\n|         10005|  120.5|        0|        null|\n|         10012|  -25.0|        0|        null|\n|         10018|  450.0|        0|        null|\n|         10008|  750.0|        0|        null|\n|         10016| 123.45|        0|        null|\n|         10009| 275.25|        0|        null|\n|         10017|    0.0|        0|        null|\n+--------------+-------+---------+------------+\n\n"
+          }
+        ]
+      }
+    }
+  ],
+  "name": "task1",
+  "id": "2MQBT9Y32",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/task1"
+}
